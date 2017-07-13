@@ -171,6 +171,9 @@ dissect_vsock(tvbuff_t *tvb, packet_info *pinfo, proto_tree *tree,
     proto_tree_add_item_ret_uint(vsock_tree, hf_vsock_t_len, tvb, offset, 2, ENC_LITTLE_ENDIAN, &t_len);
     offset += 2;
 
+    /* Skip reserved field used to 8-byte align struct af_vsockmon_hdr */
+    offset += 2;
+
     payload_offset = offset + t_len;
 
     /* Append summary information to top tree */
